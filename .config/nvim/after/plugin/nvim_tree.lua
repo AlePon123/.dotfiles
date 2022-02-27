@@ -1,3 +1,5 @@
+local nmap = require('ale.keymap').nmap
+
 require'nvim-tree'.setup {
   disable_netrw        = true,
   hijack_netrw         = true,
@@ -68,4 +70,4 @@ require'nvim-tree'.setup {
 }
 
 --toggle nvim-tree
-vim.keymap.set('n', '<C-y>', '<cmd>NvimTreeToggle<CR>')
+nmap { '<C-y>',':NvimTreeToggle<CR>', { silent = true } }  

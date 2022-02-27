@@ -1,12 +1,13 @@
 
 vim.cmd[[packadd packer.nvim]]
+
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
 
-    --completion
+    --completions
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
@@ -52,8 +53,9 @@ return require('packer').startup(function()
     }
 
     --fzf
-    use { "junegunn/fzf", run = "./install --all" }
+    use { "junegunn/fzf" }
     use { "junegunn/fzf.vim" }
+
     --discord presence
     use 'andweeb/presence.nvim'
 
@@ -62,9 +64,18 @@ return require('packer').startup(function()
     use 'akinsho/nvim-bufferline.lua'
 
     --rust
-    use "simrat39/rust-tools.nvim"
+    use 'simrat39/rust-tools.nvim'
+    use 'rust-lang/rust.vim'
+    
+    --GIT
+    use 'TimUntersberger/neogit'
+    use 'sindrets/diffview.nvim'
 
+    --comment
     use "numToStr/Comment.nvim"
 
+    --treesitter stuf   
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+    use "nvim-treesitter/playground"
+    use "haringsrob/nvim_context_vt"
 end)

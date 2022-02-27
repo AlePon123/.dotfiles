@@ -46,7 +46,7 @@ cmp.setup {
        { name = 'luasnip' }, 
        { name = 'path' },
        { name = 'buffer', keyword_length = 4 },
-    } 
+    },
 }
 
 local Group = require("colorbuddy.group").Group

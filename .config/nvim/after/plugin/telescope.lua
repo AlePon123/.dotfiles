@@ -3,6 +3,7 @@ if not status_ok then
   return
 end
 
+local nmap = require('ale.keymap').nmap
 local actions = require "telescope.actions"
 
 telescope.setup {
@@ -77,28 +78,16 @@ telescope.setup {
     },
   },
   pickers = {
-    -- Default configuration for builtin pickers goes here:
-    -- picker_name = {
-    --   picker_config_key = value,
-    --   ...
-    -- }
-    -- Now the picker_config_key will be applied every time you call this
-    -- builtin picker
   },
   extensions = {
-    -- Your extension configuration goes here:
-    -- extension_name = {
-    --   extension_config_key = value,
-    -- }
-    -- please take a look at the readme of the extension you want to configure
   },
 }
 
 
 --mappings telescope
-vim.keymap.set("n","ff","<cmd>lua require('telescope.builtin').find_files()<cr>")
-vim.keymap.set("n","fg","<cmd>lua require('telescope.builtin').live_grep()<cr>")
-vim.keymap.set("n","fb","<cmd>lua require('telescope.builtin').buffers()<cr>")
-vim.keymap.set("n","fh","<cmd>lua require('telescope.builtin').help_tags()<cr>")
+nmap { "ff","<cmd>lua require('telescope.builtin').find_files()<cr>" }
+nmap { "fg","<cmd>lua require('telescope.builtin').live_grep()<cr>" }
+nmap { "fb","<cmd>lua require('telescope.builtin').buffers()<cr>" }
+nmap { "fh","<cmd>lua require('telescope.builtin').help_tags()<cr>" }
 
 

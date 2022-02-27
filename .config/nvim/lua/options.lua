@@ -4,6 +4,7 @@ opt.pumblend = 17
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"
 
+
 opt.termguicolors = true
 opt.showmode = false
 opt.showcmd = true
@@ -19,7 +20,7 @@ opt.cursorline = true
 opt.equalalways = false 
 opt.splitright = true 
 opt.splitbelow = true
-opt.updatetime = 1000 
+opt.updatetime = 300
 opt.hlsearch = true 
 opt.scrolloff = 10 
 

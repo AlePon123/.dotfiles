@@ -63,7 +63,7 @@ ls.snippets = {
         ),
         s("fn", fmt(
             [[
-            fn {name} ({args}) {{
+            fn {name}({args}) {{
                 {insert}
             }}
             ]],
@@ -76,7 +76,7 @@ ls.snippets = {
         ),
         s("rfn", fmt(
             [[
-            fn {name} ({args}) -> {_type} {{
+            fn {name}({args}) -> {_type} {{
                 {insert}
             }}
             ]],
