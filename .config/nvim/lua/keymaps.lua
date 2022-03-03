@@ -5,26 +5,29 @@ local vmap = require('ale.keymap').vmap
 vim.g.mapleader = " "
 
 --move around lsp Warnings/Errors
-nmap{'g[', ':lua vim.diagnostic.goto_prev(}<CR>', { noremap = true, silent = true }}
-nmap{'g]', ':lua vim.diagnostic.goto_next(}<CR>', { noremap = true, silent = true }}
+-- nmap{'g[', ':lua vim.diagnostic.goto_prev(}<CR>', { noremap = true, silent = true }}
+-- nmap{'g]', ':lua vim.diagnostic.goto_next(}<CR>', { noremap = true, silent = true }}
 
 vmap { '<C-c>', '"+y', { noremap = true } } --yank to system clipboard
 imap { '<C-v>', '<Esc>"+p', } --paste from system clipboard
 nmap { '<C-s>', ':w<CR>', { noremap = true } } --save file
 nmap { '<Space>', ':nohl<CR>', { noremap = true } } --nohl
 
---save and source for nvim filetype
-nmap { 
-    '<Space>t', 
+-- save and source for nvim filetype
+nmap {
+    '<Space>t',
     function ()
-        if vim.bo.filetype == 'lua' or vim.bo.filetype == 'vim' then 
+        if vim.bo.filetype == 'lua' or vim.bo.filetype == 'vim' then
             vim.cmd[[w]]
             vim.cmd[[so %]]
-        else 
+        else
             print "Not nvim filetype"
         end
     end,
-} 
+}
+
+nmap { '<S-j>', 'jjjjj' }
+nmap { '<S-k>', 'kkkkk' }
 
 vmap { 'q', '<' }
 vmap { 'e', '>' }

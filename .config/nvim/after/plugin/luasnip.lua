@@ -20,7 +20,6 @@ ls.config.set_config {
 }
 
 
-
 ls.snippets = {
     rust = {
         s("struct", fmt(
@@ -44,7 +43,7 @@ ls.snippets = {
             }}
             ]], 
             {
-                name = i(1,"name"),
+               name = i(1),
                 insert = i(0)
             }
             )
@@ -61,35 +60,49 @@ ls.snippets = {
             }
             )
         ),
-        s("fn", fmt(
+        s("f", fmt(
             [[
             fn {name}({args}) {{
                 {insert}
             }}
+
             ]],
             {
-                name = i(1,"name"),
-                args = i(2,"args"),
+                name = i(1),
+                args = i(2),
                 insert = i(0),
             }
             )
         ),
-        s("rfn", fmt(
+        s("rf", fmt(
             [[
             fn {name}({args}) -> {_type} {{
                 {insert}
             }}
             ]],
             {
-                name = i(1,"name"),
-                args = i(2,"args"),
+                name = i(1),
+                args = i(2),
                 _type = i(3,"type"),
                 insert = i(0),
             }
             )
         ),
+        s("pr", fmt(
+            [[
+            println!("{inner}", {args});
+            ]],
+            {
+                inner = i(1),
+                args = i(0),
+            }
+            )
+        )
     },
 }
+
+--source snippets
+vim.keymap.set("n", "<S-m>", ":source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
   if ls.expand_or_jumpable() then

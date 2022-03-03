@@ -1,20 +1,28 @@
-
 vim.cmd[[packadd packer.nvim]]
 
 return require('packer').startup(function()
     use 'wbthomason/packer.nvim'
 
+    use { 'lewis6991/impatient.nvim',
+        config = function()
+          require('impatient')
+        end
+    }
+    --colorscheme 
+    use 'morhetz/gruvbox'
     use 'nvim-lua/plenary.nvim'
-    use 'nvim-telescope/telescope.nvim'
 
     --completions
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-nvim-lua'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-cmdline'
+    use { 'tzachar/cmp-tabnine', run='./install.sh' }
+    use "lukas-reineke/cmp-under-comparator"
     use 'L3MON4D3/LuaSnip'
-    use 'saadparwaiz1/cmp_luasnip' 
+    use 'saadparwaiz1/cmp_luasnip'
 
     --lsp's
     use 'neovim/nvim-lspconfig'
@@ -29,12 +37,19 @@ return require('packer').startup(function()
             require('codelens_extensions').setup()
         end,
     }
-    
+
     --TJ plugins
     use 'tjdevries/colorbuddy.nvim'
     use 'tjdevries/gruvbuddy.nvim'
     use 'tjdevries/express_line.nvim'
-    
+    use 'tjdevries/cyclist.vim'
+
+    --Dap
+    use 'mfussenegger/nvim-dap'
+    use "rcarriga/nvim-dap-ui"
+    use "theHamsta/nvim-dap-virtual-text"
+    use "nvim-telescope/telescope-dap.nvim"
+
     -- Pretty colors
     use {
         'norcalli/nvim-colorizer.lua',
@@ -43,6 +58,7 @@ return require('packer').startup(function()
         end,
         run = ':ColorizerToggle'
     }
+
     --XkbSwitch
     use {
         'lyokha/vim-xkbswitch',
@@ -52,8 +68,11 @@ return require('packer').startup(function()
         end,
     }
 
+
+    use 'nvim-telescope/telescope.nvim'
+
     --fzf
-    use { "junegunn/fzf" }
+    use { "junegunn/fzf", run='./install.sh' }
     use { "junegunn/fzf.vim" }
 
     --discord presence
@@ -77,5 +96,7 @@ return require('packer').startup(function()
     --treesitter stuf   
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use "nvim-treesitter/playground"
+    use 'romgrk/nvim-treesitter-context'
+
     use "haringsrob/nvim_context_vt"
 end)
