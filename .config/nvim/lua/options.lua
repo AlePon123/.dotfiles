@@ -4,7 +4,7 @@ opt.pumblend = 17
 opt.wildmode = "longest:full"
 opt.wildoptions = "pum"
 
-
+opt.updatetime = 300
 opt.termguicolors = true
 opt.showmode = false
 opt.showcmd = true

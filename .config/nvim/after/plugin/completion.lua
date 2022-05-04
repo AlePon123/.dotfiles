@@ -18,14 +18,13 @@ cmp.setup {
     mapping = {
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping {
-           c = cmp.mapping.abort(),
-           c = cmp.mapping.close(),
-        },
         ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(), 
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i","c" } ),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
         ['<CR>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        }),
+        ["<C-space>"] = cmp.mapping.confirm({
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
         })
@@ -37,7 +36,7 @@ cmp.setup {
             buffer = "[buf]",
             nvim_lsp = "[LSP]",
             cmp_tabnine = "[TabNine]",
-            nvim_lua = "[api]", 
+            nvim_lua = "[vim]", 
             path = "[path]",
             luasnip = "[snip]",
           },
@@ -71,30 +70,33 @@ cmp.setup {
         ghost_text = true,
     },
     sources = {
+       { name = 'nvim_lsp_signature_help' },
        { name = 'nvim_lsp' },
        { name = "nvim_lua" },
        { name = 'path' },
        { name = 'luasnip' }, 
        { name = 'buffer', keyword_length = 3 },
-       { name = 'cmp_tabnine' },      
     },
 }
 
-tabnine:setup({
-	max_lines = 1000;
-	max_num_results = 20;
-	sort = false;
-	run_on_every_keystroke = true;
-	snippet_placeholder = '..';
-})
+_ = vim.cmd [[
+  augroup CmpZsh
+    au!
+    autocmd Filetype zsh lua require'cmp'.setup.buffer { sources = { { name = "zsh" }, } }
+  augroup END
+]]
 
 local Group = require("colorbuddy.group").Group
+local Color = require("colorbuddy.color").Color
 local g = require("colorbuddy.group").groups
 local s = require("colorbuddy.style").styles
 local c = require("colorbuddy.color").colors
 
-Group.new("CmpItemAbbr", c.white)
+Color.new('GruvBoxOrange', '#fe8019')
+Color.new('GruvBoxGreen', '#b8bb26')
+
+Group.new("CmpItemAbbr", c.GruvBoxGreen)
 Group.new("CmpItemAbbrDeprecated", c.red)
 Group.new("CmpItemAbbrMatchFuzzy", g.CmpItemAbbr.fg:dark(), nil, s.italic)
-Group.new("CmpItemKind", c.orange)
+Group.new("CmpItemKind", c.GruvBoxOrange)
 Group.new("CmpItemMenu", c.gray)

@@ -1,5 +1,5 @@
-require("el").reset_windows()
 
+require("el").reset_windows()
 local builtin = require "el.builtin"
 local extensions = require "el.extensions"
 local sections = require "el.sections"
@@ -10,13 +10,11 @@ local diagnostic = require "el.diagnostic"
 
 local has_lsp_extensions, ws_diagnostics = pcall(require, "lsp_extensions.workspace.diagnostic")
 
-
 local git_icon = subscribe.buf_autocmd("el_file_icon", "BufRead", function(_, bufnr)
   local icon = extensions.file_icon(_, bufnr)
   if icon then
     return icon .. " "
   end
-
   return ""
 end)
 
@@ -46,95 +44,57 @@ local ws_diagnostic_counts = function(_, buffer)
   elseif error_count < 5 then
     table.insert(messages, string.format("%s#%s#%s%%*", "%", "StatuslineError" .. error_count, x))
   else
-    table.insert(messages, string.format("%s#%s#%s%%*", "%", "StatuslineError5", x))
+    table.insert(messages, string.format("%s#%s#%s%%*", "%", "StatuslineError5" , x))
   end
 
   return table.concat(messages, "")
 end
 
 local show_current_func = function(window, buffer)
-  if buffer.filetype == "lua" then
-    return ""
+  if buffer.filetype == 'lua' then
+    return ''
   end
+  local func = lsp_statusline.current_function(window, buffer):gsub("%[ ", ""):gsub("% ]", "")
 
-  return lsp_statusline.current_function(window, buffer)
-end
-
-local minimal_status_line = function(_, buffer)
-  if string.find(buffer.name, "sourcegraph/sourcegraph") then
-    return true
-  end
-end
-
-local is_sourcegraph = function(_, buffer)
-  if string.find(buffer.name, "sg://") then
-    return true
-  end
+  return "" .. "(" .. func .. ")"
 end
 
 local diagnostic_display = diagnostic.make_buffer()
 
-require("el").setup {
-  generator = function(window, buffer)
-    local is_minimal = minimal_status_line(window, buffer)
-    local is_sourcegraph = is_sourcegraph(window, buffer)
-
-    local mode = extensions.gen_mode { format_string = " %s " }
-    if is_sourcegraph then
-      return {
-        { mode },
-        { sections.split, required = true },
-        { builtin.file },
-        { sections.split, required = true },
-        { builtin.filetype },
-      }
-    end
-
-    local items = {
-      { mode, required = true },
-      { git_branch },
-      { " " },
-      { sections.split, required = true },
-      { git_icon },
-      { sections.maximum_width(builtin.make_responsive_file(140, 90), 0.40), required = true },
-      { sections.collapse_builtin { { " " }, { builtin.modified_flag } } },
-      { sections.split, required = true },
-      { diagnostic_display },
-      { show_current_func },
-      -- { lsp_statusline.server_progress },
-      -- { ws_diagnostic_counts },
-      { git_changes },
-      { "[" },
-      { builtin.line_with_width(3) },
-      { ":" },
-      { builtin.column_with_width(2) },
-      { "]" },
-      {
-        sections.collapse_builtin {
-          "[",
-          builtin.help_list,
-          builtin.readonly_list,
-          "]",
-        },
+require('el').setup {
+  generator = function(_, _)
+    return {
+      extensions.gen_mode {
+        format_string = ' %s '
       },
-      { builtin.filetype },
+      git_branch,
+      ' ',
+      sections.split,
+      git_icon,
+      sections.maximum_width(
+        builtin.make_responsive_file(140, 90),
+        0.30
+      ),
+      -- sections.collapse_builtin {
+      --   ' ',
+      --   builtin.modified_flag
+      -- },
+      sections.split,
+      ws_diagnostic_counts,
+      ' ',
+      show_current_func,
+      lsp_statusline.server_progress,
+      -- git_changes,
+      '[', builtin.line_with_width(3), ':',  builtin.column_with_width(2), ']',
+      sections.collapse_builtin {
+        '[',
+        builtin.help_list,
+        builtin.readonly_list,
+        ']',
+      },
+      builtin.filetype,
     }
-
-    local add_item = function(result, item)
-      if is_minimal and not item.required then
-        return
-      end
-
-      table.insert(result, item)
-    end
-
-    local result = {}
-    for _, item in ipairs(items) do
-      add_item(result, item)
-    end
-
-    return result
-  end,
+  end
 }
 
 require("fidget").setup {

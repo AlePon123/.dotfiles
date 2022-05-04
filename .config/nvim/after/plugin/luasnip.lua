@@ -1,8 +1,10 @@
 local ls = require "luasnip"
 local types = require "luasnip.util.types"
 local s = ls.s
+local sn = ls.sn
 local fmt = require("luasnip.extras.fmt").fmt
 local c = ls.choice_node
+local d = ls.dynamic_node
 local t = ls.text_node
 local i = ls.insert_node
 
@@ -20,7 +22,7 @@ ls.config.set_config {
 }
 
 
-ls.snippets = {
+ls.add_snippets (nil, {
     rust = {
         s("struct", fmt(
             [[
@@ -61,29 +63,18 @@ ls.snippets = {
             )
         ),
         s("f", fmt(
-            [[
-            fn {name}({args}) {{
-                {insert}
-            }}
-
-            ]],
-            {
-                name = i(1),
-                args = i(2),
-                insert = i(0),
-            }
-            )
-        ),
-        s("rf", fmt(
-            [[
-            fn {name}({args}) -> {_type} {{
+            [[ 
+            fn {name}({args}){_return} {{
                 {insert}
             }}
             ]],
             {
-                name = i(1),
+                name = i(1, "name"),
                 args = i(2),
-                _type = i(3,"type"),
+                _return = c(3, {
+                   t"",
+                   {t" -> ", i(1)},
+                }),
                 insert = i(0),
             }
             )
@@ -99,10 +90,7 @@ ls.snippets = {
             )
         )
     },
-}
-
---source snippets
-vim.keymap.set("n", "<S-m>", ":source ~/.config/nvim/after/plugin/luasnip.lua<CR>")
+})
 
 vim.keymap.set({ "i", "s" }, "<c-k>", function()
   if ls.expand_or_jumpable() then

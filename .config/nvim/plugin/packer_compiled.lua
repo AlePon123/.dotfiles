@@ -170,6 +170,11 @@ _G.packer_plugins = {
     path = "/home/alepon/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
+  ["lir-git-status.nvim"] = {
+    loaded = true,
+    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/lir-git-status.nvim",
+    url = "https://github.com/tamago324/lir-git-status.nvim"
+  },
   ["lsp-status.nvim"] = {
     loaded = true,
     path = "/home/alepon/.local/share/nvim/site/pack/packer/start/lsp-status.nvim",
@@ -232,20 +237,10 @@ _G.packer_plugins = {
     path = "/home/alepon/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
-    url = "https://github.com/kyazdani42/nvim-tree.lua"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/home/alepon/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
-  },
-  ["nvim-treesitter-context"] = {
-    loaded = true,
-    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
-    url = "https://github.com/romgrk/nvim-treesitter-context"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -291,6 +286,21 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/alepon/.local/share/nvim/site/pack/packer/start/telescope-dap.nvim",
     url = "https://github.com/nvim-telescope/telescope-dap.nvim"
+  },
+  ["telescope-file-browser.nvim"] = {
+    loaded = true,
+    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/telescope-file-browser.nvim",
+    url = "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+  },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
+  },
+  ["telescope-media-files.nvim"] = {
+    loaded = true,
+    path = "/home/alepon/.local/share/nvim/site/pack/packer/start/telescope-media-files.nvim",
+    url = "https://github.com/nvim-telescope/telescope-media-files.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

@@ -1,7 +1,9 @@
 rust_tools = require"rust-tools"
+local lsp = require "ale.lsp"
 rust_tools.setup {
         tools = { -- rust-tools options
           autoSetHints = true,
+
           hover_with_actions = true,
 
           runnables = {
@@ -15,8 +17,8 @@ rust_tools.setup {
             only_current_line = false,
             only_current_line_autocmd = "CursorHold",
             show_parameter_hints = true,
-            parameter_hints_prefix = "<- ",
-            other_hints_prefix = "-> ",
+            parameter_hints_prefix = "<-",
+            other_hints_prefix = "->",
             highlight = "Comment",
           },
 
@@ -36,6 +38,10 @@ rust_tools.setup {
         },
 
     server = {
+      on_attach = lsp.on_attach,
+      on_init = lsp.on_init,
+      capabilities = lsp.capabilities,
+
       flags = {
         debounce_text_changes = false,
       },

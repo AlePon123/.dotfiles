@@ -32,9 +32,9 @@ configs.setup {
 
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = { "rust" }, -- list of language that will be disabled
-    additional_vim_regex_highlighting = true,
-    custom_captures = custom_captures,
+    -- disable = { "rust" }, -- list of language that will be disabled
+    additional_vim_regex_highlighting = false,
+    -- custom_captures = custom_captures,
   },
 
   refactor = {
